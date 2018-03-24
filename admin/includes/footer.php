@@ -2,7 +2,7 @@
 
 <!-- Footer -->
 <footer class="text-center" id="footer">
-	&copy; Copyright 2016 Shaunta's Boutique
+	&copy; Copyright 2018 Skateshop
 </footer>
 
 <script>
@@ -19,7 +19,7 @@
 	function get_child_options() {
 		var parentID = jQuery('#parent').val();
 		jQuery.ajax({
-			url: '/ecommerce/admin/parsers/child_categories.php',
+			url: '/skateshop/admin/parsers/child_categories.php',
 			type: 'post',
 			data: {parentID : parentID},
 			success: function(data) {

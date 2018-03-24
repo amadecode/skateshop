@@ -1,5 +1,5 @@
 <?php
-	require_once $_SERVER['DOCUMENT_ROOT'].'/ecommerce/core/init.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/skateshop/core/init.php';
 	$parentID = (int)$_POST['parentID'];
 	$childQuery = $db->query("SELECT * FROM categories WHERE parent = '{$parentID}' ORDER BY category");
 	ob_start();

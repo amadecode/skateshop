@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/ecommerce/admin/index.php">Shaunta's Boutique Admin</a>
+			<a class="navbar-brand" href="/skateshop/admin/index.php">Skateshop Admin</a>
 		</div>
 
 		<div class="collapse navbar-collapse">

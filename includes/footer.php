@@ -3,7 +3,7 @@
 
 	<!-- Footer -->
 	<footer class="text-center" id="footer">
-		&copy; Copyright 2016 Shaunta's Boutique
+		&copy; Copyright 2018 Skateshop
 	</footer>
 
 	<script src="js/jquery-1.12.3.min.js"></script>
@@ -27,7 +27,7 @@
 			var data = {"id" : id};
 			// send data to detailsmodal.php
 			jQuery.ajax({
-				url		: '/ecommerce/includes/detailsmodal.php',
+				url		: '/skateshop/includes/detailsmodal.php',
 				method	: "post",
 				data	: data,
 				success	: function(data){

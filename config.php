@@ -1,2 +1,2 @@
 <?php
-	define('BASEURL', $_SERVER['DOCUMENT_ROOT'].'/ecommerce/');
+	define('BASEURL', $_SERVER['DOCUMENT_ROOT'].'/skateshop/');
