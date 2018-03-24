@@ -76,7 +76,7 @@
 				$allowed = array('png', 'jpg', 'jpeg', 'gif');
 				$uploadName = md5(microtime()).'.'.$fileExt;
 				$uploadPath = BASEURL.'images/products/'.$uploadName;
-				$dbpath = '/ecommerce/images/products/'.$uploadName;
+				$dbpath = '/skateshop/images/products/'.$uploadName;
 				if($mimeType != 'image') {
 					$errors[] .= 'The file must be an image.';
 				}
