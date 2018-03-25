@@ -21,7 +21,9 @@
     <!--materialize js-->
     <script type="text/javascript" src="./js/materialize.min.js"></script>
     <!--prism-->
-    <script type="text/javascript" src="js/plugins/prism/prism.js"></script>
+    <script type="text/javascript" src="./js/plugins/prism/prism.js"></script>
+    <!--axios js-->
+    <script type="text/javascript" src="./js/plugins/axios/axios.min.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="./js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     
@@ -36,8 +38,8 @@
     <script type="text/javascript" src="./js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <script type="text/javascript" src="./js/plugins/jvectormap/vectormap-script.js"></script>    
     <!-- data-tables -->
-    <script type="text/javascript" src="js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/plugins/data-tables/data-tables-script.js"></script>    
+    <script type="text/javascript" src="./js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="./js/plugins/data-tables/data-tables-script.js"></script>    
     
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
     <script type="text/javascript" src="./js/plugins.min.js"></script>
