@@ -687,7 +687,7 @@
                     <br/>
                     <div class="row">
                         <div class="col s12 m4">
-                            <input type="text" placeholder="Brand Name" />
+                            <input id="txtNewBrand" type="text" placeholder="Brand Name" />
                             <button id="btnAddBrand" class="btn btn-primary">Add Brand</button>
                         </div>
                         <div class="col s12 m8">
@@ -706,31 +706,78 @@
             `;
             this.render(html,$('#app')[0]);
 
-            getBrandDetails();            
-            function getBrandDetails(){
-                axios.get('./php/brand', {
-                    params: {
-                        action: "getAll" 
-                    }
-                })
-                .then(function (res) {
-                    let html = ``;
-                    let data = res.data;
-                    for(let i=0;i<data.length;i++){
-                        html += `
-                            <tr>
-                                <td>${data[i].brand}</td>
-                            </tr>
-                        `;
-                    }
-                    component.render(html,$('#tblBrandDetails')[0]);
-                    $('#tblBrands').DataTable();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            }
+            this.getBrandDetails();
+
+            $('#btnAddBrand').click(function(){
+                let brand = $('#txtNewBrand').val();
+                if(brand.length<2){                    
+                    swal({
+                        title: "Invalid Input!",
+                        text: "Make sure you have properly set the brand name",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });                   
+                }else{                    
+                    var params = new URLSearchParams();
+                    params.append('action', 'insert');
+                    params.append('brand', brand);
+                    axios.post('./php/brand', params)
+                    .then(function (res) {
+                        //console.log(res);
+                        swal({
+                            title: res.data.status.toUpperCase(),
+                            text: res.data.msg,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }); 
+                        if(res.data.msg){
+                            component.getBrandDetails();
+                        }
+                    })
+                    .catch(function (error) {
+                        //console.log(error);
+                        swal({
+                            title: "Error",
+                            text: error,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }); 
+                    });
+                }
+            });
         }
+
+        getBrandDetails(){
+            axios.get('./php/brand', {
+                params: {
+                    action: "getAll" 
+                }
+            })
+            .then(function (res) {
+                let html = ``;
+                let data = res.data;
+                for(let i=0;i<data.length;i++){
+                    html += `
+                        <tr>
+                            <td>${data[i].brand}</td>
+                        </tr>
+                    `;
+                }
+                component.render(html,$('#tblBrandDetails')[0]);
+                $('#tblBrands').DataTable();
+                //console.log("Brands has been loaded!");
+            })
+            .catch(function (error) {
+                //console.log(error);
+                swal({
+                    title: "Error",
+                    text: error,
+                    timer: 2000,
+                    showConfirmButton: false
+                }); 
+            });
+        }
+
     }
 
     let component = new Component();

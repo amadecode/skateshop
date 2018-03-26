@@ -36,6 +36,6 @@
     <link href="./js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="./js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-
+    <link href="./js/plugins/sweetalert/sweetalert.css" type="text/css" rel="stylesheet" media="screen,projection">
   
 </head>

@@ -40,6 +40,8 @@
     <!-- data-tables -->
     <script type="text/javascript" src="./js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="./js/plugins/data-tables/data-tables-script.js"></script>    
+
+    <script type="text/javascript" src="./js/plugins/sweetalert/sweetalert.min.js"></script>   
     
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
     <script type="text/javascript" src="./js/plugins.min.js"></script>
