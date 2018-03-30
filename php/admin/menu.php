@@ -62,7 +62,7 @@
                     </li>
 
                     <li>
-                        <a href="index.html" class="cyan-text">
+                        <a href="#orders" id="btnOrders" class="cyan-text">
                             <i class="mdi-action-dashboard"></i>
                             <span>Orders</span>
                         </a>
@@ -74,7 +74,7 @@
               </nav>
 
                 <!-- Products-->
-                <ul id="Products" class="dropdown-content dropdown-horizontal-list">
+                <ul id="Products" class="dropdownProduct dropdown-content dropdown-horizontal-list">
                   <li><a href="ui-buttons.html" class="cyan-text">Decks</a></li>
                   <li><a href="ui-badges.html" class="cyan-text">Wheels</a></li>                  
                   <li><a href="ui-cards.html" class="cyan-text">Trucks</a></li>

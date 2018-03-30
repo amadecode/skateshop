@@ -1,16 +1,16 @@
 <?php
 	require("db.php");
 	header('Content-Type: application/json');
-	$table = 'categories';
-
+	$table = 'products';
 
 	if(isset($_GET['action'])){
 		$isError = false;
 		$action = $_GET['action'];	
 
 		if($action=="getAll"){
+			$category_id = $_GET['category_id'];
 			$arr = array();
-			$query = "SELECT * FROM `$table`";
+			$query = "SELECT * FROM `$table` WHERE categories='$category_id'";
 			$result = mysqli_query($con,$query) or die(mysql_error());
 			while($row = mysqli_fetch_array($result)){
 				$arr[] = $row;
