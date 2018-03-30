@@ -33,7 +33,7 @@
                 <div class="nav-wrapper">                  
                   <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
                     <li>
-                        <a href="index.html" class="cyan-text">
+                        <a href="./admin" class="cyan-text">
                             <i class="mdi-action-dashboard"></i>
                             <span>Dashboard</span>
                         </a>
@@ -55,7 +55,7 @@
                     </li>
 
                     <li>
-                        <a href="index.html" class="cyan-text">
+                        <a href="#categories" id="btnCategories" class="cyan-text">
                             <i class="mdi-action-dashboard"></i>
                             <span>Categories</span>
                         </a>

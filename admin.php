@@ -24,206 +24,7 @@
         <div class="wrapper">
 
             <!-- START LEFT SIDEBAR NAV-->
-            <aside id="left-sidebar-nav hide-on-large-only">
-                <ul id="slide-out" class="side-nav leftside-navigation ">
-                    <li class="user-details cyan darken-2">
-                        <div class="row">
-                            <div class="col col s4 m4 l4">
-                                <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
-                            </div>
-                            <div class="col col s8 m8 l8">
-                                <ul id="profile-dropdown" class="dropdown-content">
-                                    <li><a href="#"><i class="mdi-action-face-unlock"></i> Profile</a>
-                                    </li>                                    
-                                    <li class="divider"></li>                                   
-                                    <li><a href="./logout"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
-                                    </li>
-                                </ul>
-                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">Admin Admin<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                                <p class="user-roal">Administrator</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="bold active"><a href="index.html" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
-                    </li>
-                    
-                    <li class="no-padding">
-                        <ul class="collapsible collapsible-accordion">
-                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> CSS</a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="css-typography.html">Typography</a>
-                                        </li>                                        
-                                        <li><a href="css-icons.html">Icons</a>
-                                        </li>
-                                        <li><a href="css-shadow.html">Shadow</a>
-                                        </li>
-                                        <li><a href="css-media.html">Media</a>
-                                        </li>
-                                        <li><a href="css-sass.html">Sass</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-palette"></i> UI Elements</a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="ui-buttons.html">Buttons</a>
-                                        </li>
-                                        <li><a href="ui-badges.html">Badges</a>
-                                        </li>
-                                        <li><a href="ui-cards.html">Cards</a>
-                                        </li>
-                                        <li><a href="ui-collections.html">Collections</a>
-                                        </li>
-                                        <li><a href="ui-accordions.html">Accordian</a>
-                                        </li>
-                                        <li><a href="ui-tabs.html">Tabs</a>
-                                        </li>
-                                        <li><a href="ui-navbar.html">Navbar</a>
-                                        </li>
-                                        <li><a href="ui-pagination.html">Pagination</a>
-                                        </li>
-                                        <li><a href="ui-preloader.html">Preloader</a>
-                                        </li>
-                                        <li><a href="ui-modals.html">Modals</a>
-                                        </li>
-                                        <li><a href="ui-media.html">Media</a>
-                                        </li>
-                                        <li><a href="ui-toasts.html">Toasts</a>
-                                        </li>
-                                        <li><a href="ui-tooltip.html">Tooltip</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a href="app-widget.html" class="waves-effect waves-cyan"><i class="mdi-device-now-widgets"></i> Widgets <span class="new badge"></span></a>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i> Tables</a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="table-basic.html">Basic Tables</a>
-                                        </li>
-                                        <li><a href="table-data.html">Data Tables</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-insert-comment"></i> Forms</a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="form-elements.html">Form Elements</a>
-                                        </li>
-                                        <li><a href="form-layouts.html">Form Layouts</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-social-pages"></i> Pages</a>
-                                <div class="collapsible-body">
-                                    <ul>                                        
-                                        <li><a href="page-contact.html">Contact Page</a>
-                                        </li>
-                                        <li><a href="page-todo.html">ToDos</a>
-                                        </li>
-                                        <li><a href="page-blog-1.html">Blog Type 1</a>
-                                        </li>
-                                        <li><a href="page-blog-2.html">Blog Type 2</a>
-                                        </li>
-                                        <li><a href="page-404.html">404</a>
-                                        </li>
-                                        <li><a href="page-500.html">500</a>
-                                        </li>
-                                        <li><a href="page-blank.html">Blank</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-shopping-cart"></i> eCommers</a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="eCommerce-products-page.html">Products Page</a>
-                                        </li>                                        
-                                        <li><a href="eCommerce-pricing.html">Pricing Table</a>
-                                        </li>
-                                        <li><a href="eCommerce-invoice.html">Invoice</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-image"></i> Medias</a>
-                                <div class="collapsible-body">
-                                    <ul>                                        
-                                        <li><a href="media-gallary-page.html">Gallery Page</a>
-                                        </li>
-                                        <li><a href="media-hover-effects.html">Image Hover Effects</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> User</a>
-                                <div class="collapsible-body">
-                                    <ul>     
-                                        <li><a href="user-profile-page.html">User Profile</a>
-                                        </li>                                   
-                                        <li><a href="user-login.html">Login</a>
-                                        </li>                                        
-                                        <li><a href="user-register.html">Register</a>
-                                        </li>
-                                        <li><a href="user-forgot-password.html">Forgot Password</a>
-                                        </li>
-                                        <li><a href="user-lock-screen.html">Lock Screen</a>
-                                        </li>                                        
-                                        <li><a href="user-session-time-out.html">Session Timeout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            
-                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Charts</a>
-                                <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="charts-chartjs.html">Chart JS</a>
-                                        </li>
-                                        <li><a href="charts-chartist.html">Chartist</a>
-                                        </li>
-                                        <li><a href="charts-morris.html">Morris Charts</a>
-                                        </li>
-                                        <li><a href="charts-xcharts.html">xCharts</a>
-                                        </li>
-                                        <li><a href="charts-flotcharts.html">Flot Charts</a>
-                                        </li>
-                                        <li><a href="charts-sparklines.html">Sparkline Charts</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="li-hover"><div class="divider"></div></li>
-                    <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
-                    <li><a href="css-grid.html"><i class="mdi-image-grid-on"></i> Grid</a>
-                    </li>
-                    <li><a href="css-color.html"><i class="mdi-editor-format-color-fill"></i> Color</a>
-                    </li>
-                    <li><a href="css-helpers.html"><i class="mdi-communication-live-help"></i> Helpers</a>
-                    </li>
-                    <li><a href="changelogs.html"><i class="mdi-action-swap-vert-circle"></i> Changelogs</a>
-                    </li>                    
-                    <li class="li-hover"><div class="divider"></div></li>
-                    <li class="li-hover"><p class="ultra-small margin more-text">Daily Sales</p></li>
-                    <li class="li-hover">
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <div class="sample-chart-wrapper">                            
-                                    <div class="ct-chart ct-golden-section" id="ct2-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
-            </aside>
+            <?php include('./php/admin/sidebarNav.php'); ?>
             <!-- END LEFT SIDEBAR NAV-->
 
             <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -388,12 +189,40 @@
 <script type="text/javascript">
     class App{
         constructor(){
-            this.state = [];
+            this.state = {
+                brand: [],
+                category: [],
+                table_brand: null,
+                table_brand_selected_id: null,
+                table_category: null,
+                table_category_selected_id: null
+            };
+            
+
+            
         }
 
         render(html, component){
             component.innerHTML = html;
         }
+
+        escapeHTML(text) {          
+            var map = {
+                '&amp;': '&',
+                '&#038;': "&",
+                '&lt;': '<',
+                '&gt;': '>',
+                '&quot;': '"',
+                '&#039;': "'",
+                '&#8217;': "’",
+                '&#8216;': "‘",
+                '&#8211;': "–",
+                '&#8212;': "—",
+                '&#8230;': "…",
+                '&#8221;': '”'
+            };
+            return text.replace(/\&[\w\d\#]{2,5}\;/g, function(m) { return map[m]; });    
+        }        
     }
 
     class Component extends App{
@@ -673,12 +502,12 @@
             `;
             this.render(html, $('#app')[0]);
 
-            this.initializeScripts();
-        }
-
-        initializeScripts(){
             $('#btnBrands').click(function(){
                 component.brands();
+            });
+
+            $('#btnCategories').click(function(){
+                component.categories();
             });
         }
 
@@ -687,13 +516,16 @@
                     <br/>
                     <div class="row">
                         <div class="col s12 m4">
+                            <button id="btnAddBrand" class="btn teal">Add</button>
+                            <button id="btnUpdateBrand" class="btn light-blue darken-2">Update</button>
+                            <button id="btnDeleteBrand" class="btn pink darken-1">Delete</button>
                             <input id="txtNewBrand" type="text" placeholder="Brand Name" />
-                            <button id="btnAddBrand" class="btn btn-primary">Add Brand</button>
                         </div>
                         <div class="col s12 m8">
                             <table id="tblBrands" class="responsive-table display" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>                                    
                                         <th>Brand</th>                                    
                                     </tr>
                                 </thead>
@@ -731,7 +563,8 @@
                             showConfirmButton: false
                         }); 
                         if(res.data.msg){
-                            component.getBrandDetails();
+                            //component.getBrandDetails();
+                            component.brands();
                         }
                     })
                     .catch(function (error) {
@@ -745,6 +578,106 @@
                     });
                 }
             });
+
+            $('#tblBrands tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    component.state.table_brand.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                    for(let i=0;i<component.state.brand.length;i++){
+                        if($(this).find('td').html() == component.state.brand[i].brand){
+                            component.state.table_brand_selected_id = component.state.brand[i].id;                              
+                            $('#txtNewBrand').val(component.state.brand[i].brand);
+                            break;                       
+                        }
+                    }
+                    
+                }
+            });
+
+            $('#btnUpdateBrand').click( function () { 
+                if($('#txtNewBrand').val().length > 1){
+                    var params = new URLSearchParams();
+                    params.append('action', 'put');
+                    params.append('id', component.state.table_brand_selected_id);
+                    params.append('brand', $('#txtNewBrand').val());
+                    axios.post('./php/brand', params)
+                    .then(function (res) {
+                        //console.log(res);
+                        swal({
+                            title: res.data.status.toUpperCase(),
+                            text: res.data.msg,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }); 
+                        if(res.data.msg){
+                            component.state.table_brand_selected_id = null;
+                            component.brands();
+                        }
+                    })
+                    .catch(function (error) {
+                        //console.log(error);
+                        swal({
+                            title: "Error",
+                            text: error,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }); 
+                    });
+                }else{
+                    swal({
+                        title: "Error",
+                        text: "Please select a record to be deleted!",
+                        timer: 2000,
+                        showConfirmButton: false
+                    }); 
+                }
+                
+            });
+
+            $('#btnDeleteBrand').click( function () {                
+                component.state.table_brand.row('.selected').remove().draw( false );                                
+
+                if(component.state.table_brand_selected_id!=null){
+                    var params = new URLSearchParams();
+                    params.append('action', 'delete');
+                    params.append('id', component.state.table_brand_selected_id);
+                    axios.post('./php/brand', params)
+                    .then(function (res) {
+                        //console.log(res);
+                        swal({
+                            title: res.data.status.toUpperCase(),
+                            text: res.data.msg,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }); 
+                        if(res.data.msg){
+                            component.state.table_brand_selected_id = null;
+                            component.brands();
+                        }
+                    })
+                    .catch(function (error) {
+                        //console.log(error);
+                        swal({
+                            title: "Error",
+                            text: error,
+                            timer: 2000,
+                            showConfirmButton: false
+                        }); 
+                    });
+                }else{
+                    swal({
+                        title: "Error",
+                        text: "Please select a record to be deleted!",
+                        timer: 2000,
+                        showConfirmButton: false
+                    }); 
+                }
+                
+            });            
         }
 
         getBrandDetails(){
@@ -756,16 +689,35 @@
             .then(function (res) {
                 let html = ``;
                 let data = res.data;
+                component.state.brand = [];
+                let brands = [];
                 for(let i=0;i<data.length;i++){
                     html += `
                         <tr>
+                            <td>${data[i].id}</td>
                             <td>${data[i].brand}</td>
                         </tr>
                     `;
+                    component.state.brand.push({
+                        id: data[i].id,
+                        brand: data[i].brand
+                    });
                 }
+                
                 component.render(html,$('#tblBrandDetails')[0]);
-                $('#tblBrands').DataTable();
-                //console.log("Brands has been loaded!");
+                  
+                component.state.table_brand = $('#tblBrands').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false,
+                            "searchable": false
+                        }],
+                        "order": [[ 0, "desc" ]]
+                });  
+
+                /*JQUERY INITIALIZE SCRIPTS*/            
+                $('select').material_select();
             })
             .catch(function (error) {
                 //console.log(error);
@@ -778,6 +730,178 @@
             });
         }
 
+        categories(){
+            let html = `
+                <br/>
+                <div class="row">
+                    <div class="col s12 m4">
+
+                        <div class="col s12">
+                            <button id="btnAddCategory" class="btn teal">Add</button>
+                            <button id="btnUpdateCategory" class="btn light-blue darken-2">Update</button>
+                            <button id="btnDeleteCategory" class="btn pink darken-1">Delete</button>
+                        </div>
+
+                        <br/>
+                        <br/>
+                        
+                        <div class="input-field col s12">
+                            <input id="txtNewCategory" type="text" />
+                            <label id="lblNewCategory" for="txtNewCategory" class="active">Category Name</label>
+                        </div>   
+       
+                        <div class="input-field col s12">
+                            <select name="options" id="selectCategory"> </select>
+                            <label>Parent</label>
+                        </div>
+
+
+                    </div>
+                    <div class="col s12 m8">
+                        <table id="tblCategories" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Category</th>
+                                    <th>Parent</th>
+                                </tr>
+                            </thead>                 
+                 
+                           
+                            <tbody id="tblCategoryDetails"> </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+                <div class="divider"></div> 
+            `;
+            this.render(html, $('#app')[0]);
+
+   
+            this.getCategoryDetails();  
+
+
+            $('#tblCategories tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    component.state.table_category.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                    let selected_category = $(this).find('td').html();
+  
+                    for(let i=0;i<component.state.category.length;i++){                        
+                        if(selected_category == component.state.category[i].category){
+                            component.state.table_category_selected_id = component.state.category[i].id;
+                            $('#lblNewCategory').addClass('active');
+                            $('#txtNewCategory').val(component.state.category[i].category);
+                            
+                            console.log(component.state.category[i].id);
+                            console.log(component.state.category[i].category);
+                            console.log(component.state.category[i].parent);
+                            console.log(component.getCategoryName(component.state.category[i].parent));
+                            // $('#selectCategory > [value=29]').attr('selected', 'true');
+                            
+
+                            // $('option[value='+component.getCategoryName(component.state.category[i].parent)+']').attr('selected', 'selected');
+
+                            break;                       
+                        }
+                    }
+                    
+                }
+            });
+
+        }
+
+        getCategoryDetails(){
+            axios.get('./php/category', {
+                params: {
+                    action: "getAll" 
+                }
+            })
+            .then(function (res) {
+
+                let html = ``;
+                let data = res.data;
+                component.state.category = [];
+                for(let i=0;i<data.length;i++){                    
+                    component.state.category.push({
+                        id: data[i].id,
+                        category: component.escapeHTML(data[i].category),
+                        parent: data[i].parent
+                    });
+                }
+
+
+
+                for(let i=0;i<data.length;i++){
+                    html += `
+                        <tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].category}</td>
+                            <td>${component.getCategoryName(data[i].parent)}</td>
+                        </tr>
+                    `;
+                }                    
+                
+                component.render(html,$('#tblCategoryDetails')[0]);
+                component.state.table_category = $('#tblCategories').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false,
+                            "searchable": false
+                        }],
+                        "order": [[ 0, "desc" ]]
+                }); 
+
+
+                html = `<option value="0" selected>Parent</option>`;
+                for(let i=0;i<data.length;i++){      
+                    if(data[i].parent=="0"){
+                        html += `\n <option value="${data[i].id}">${data[i].category}</option> `;                        
+                    }
+                }               
+                console.log(html);
+                component.render(html,$('#selectCategory')[0]);
+                
+                /*JQUERY INITIALIZE SCRIPTS*/ 
+                //$('select').material_select();
+                $('select').material_select();
+                $('select').on('contentChanged', function() {
+                    $(this).material_select();
+                });
+                $('#selectCategory').val("29");
+
+                // var newValue = "29";
+                // var $newOpt = $("<option>").attr("value",newValue).text(newValue)
+                // $("#selectCategory").append($newOpt);
+
+                // // fire custom event anytime you've updated select
+                // $("#selectCategory").trigger('contentChanged');         
+                
+            })
+            .catch(function (error) {
+                swal({
+                    title: "Error",
+                    text: error,
+                    timer: 2000,
+                    showConfirmButton: false
+                }); 
+            });
+        } 
+
+       getCategoryName(parent){
+            let cat = component.state.category;
+            for(let i=0;i<cat.length;i++){
+                if(cat[i].id == parseInt(parent)){
+                    return cat[i].category;                            
+                }
+            }
+            return "Parent";
+        }
     }
 
     let component = new Component();

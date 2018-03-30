@@ -1,6 +1,8 @@
 <?php
 	require("db.php");
 	header('Content-Type: application/json');
+	$table = 'categories';
+
 
 	if(isset($_GET['action'])){
 		$isError = false;
@@ -8,7 +10,7 @@
 
 		if($action=="getAll"){
 			$arr = array();
-			$query = "SELECT * FROM `brand`";
+			$query = "SELECT * FROM `$table`";
 			$result = mysqli_query($con,$query) or die(mysql_error());
 			while($row = mysqli_fetch_array($result)){
 				$arr[] = $row;

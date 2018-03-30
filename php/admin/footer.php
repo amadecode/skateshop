@@ -26,6 +26,9 @@
     <script type="text/javascript" src="./js/plugins/axios/axios.min.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="./js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <!-- data-tables -->
+    <script type="text/javascript" src="./js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+    
     
 
     <!-- sparkline -->
@@ -37,9 +40,6 @@
     <script type="text/javascript" src="./js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script type="text/javascript" src="./js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <script type="text/javascript" src="./js/plugins/jvectormap/vectormap-script.js"></script>    
-    <!-- data-tables -->
-    <script type="text/javascript" src="./js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="./js/plugins/data-tables/data-tables-script.js"></script>    
 
     <script type="text/javascript" src="./js/plugins/sweetalert/sweetalert.min.js"></script>   
     
