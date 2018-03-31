@@ -31,9 +31,11 @@
   <link href="js/plugins/prism/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
   
+
+
 </head>
 
-<body class="cyan">
+<body class="white">
 
   <!-- Start Page Loading -->
   <div id="loader-wrapper">
@@ -44,12 +46,12 @@
   <!-- End Page Loading -->
 
   <div id="login-page" class="row">
-    <div class="col s12 z-depth-4 card-panel">
+    <div class="col s12 z-depth-4 card-panel indigo">
       <form class="login-form" action="./login" method="post">
         <div class="row">
           <div class="input-field col s12 center">
-            <img src="images/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
-            <p class="center login-form-text">Skateshop</p>
+            <img src="images/login-logo.png" alt="" class="circle responsive-img valign profile-image-login z-depth-3">
+            <p class="center login-form-text white-text">Skateshop</p>
           </div>
         </div>
 
@@ -97,15 +99,15 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input id="username" name="username" type="text">
-            <label for="username" class="center-align">Username</label>
+            <input id="username" name="username" type="text" style="padding-left: 10px;width: 200px;">
+            
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password" name="password" type="password">
-            <label for="password">Password</label>
+            <input id="password" name="password" type="password" style="padding-left: 10px;width: 200px;">
+            
           </div>
         </div>
        <!--  <div class="row">          
@@ -116,7 +118,7 @@
         </div> -->
         <div class="row">
           <div class="input-field col s12">
-            <button type="submit" class="btn waves-effect waves-light col s12">Login</button>
+            <button type="submit" class="btn waves-effect waves-light col s12 amber darken-2">Login</button>
           </div>
         </div>
         <div class="row">
@@ -167,6 +169,9 @@
     		setTimeout(function(){ 			
     			$('.close').click();
     		},3000);
+
+
+
     	});
     </script>
 
