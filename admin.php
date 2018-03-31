@@ -193,13 +193,15 @@
                 brand: [],
                 category: [],
                 product: [],
+                order: [],
                 table_brand: null,
                 table_brand_selected_id: null,
                 table_category: null,
                 table_category_selected_id: null,
                 table_product: null,
                 table_product_selected_id: null,
-                product_selected: null
+                product_selected: null,
+                product_selected_id: null
             };
             
 
@@ -226,7 +228,33 @@
                 '&#8221;': '”'
             };
             return text.replace(/\&[\w\d\#]{2,5}\;/g, function(m) { return map[m]; });    
-        }        
+        }     
+
+        removeUnwantedCharacters(p){
+            let p_clean = "";
+            for(let i=0;i<p.length;i++){
+                let p_char = p.charAt(i);
+                if(p_char!=' ' && p_char!='-' && p_char!=',' && p_char!=';' && p_char!='#' && p_char!='/' && p_char!='\\' && p_char!='\'' && p_char!='\"'){
+                    p_clean += p_char;
+                }
+            }
+            return p_clean;
+        }     
+
+        generateCardBG(){
+            let bg = ['green', 'pink', 'blue-grey', 'purple', 'orange', 'teal', 'amber', 'indigo', 'blue', 'red', 'deep-purple', 'light-blue' , 'lime' ,'light-green', 'yellow', 'deep-orange', 'brown', 'grey'];            
+            let rand = parseInt(Math.random()*bg.length);
+            // console.log("random number is " + rand);
+            return bg[rand];
+        } 
+
+        generateSalesPct(){
+            return parseInt(Math.random()*30) + "%";
+        }    
+
+        generateSalesAmount(){
+            return parseInt(Math.random()*3000) ;
+        } 
     }
 
     class Component extends App{
@@ -241,6 +269,7 @@
 
                     <!--card stats start-->
                     <div class="category-stats" id="card-stats">
+                        <!--
                         <div class="row">
                             
                             <div class="col s12 m6 l3">
@@ -350,6 +379,7 @@
                             </div>
                             
                         </div>
+                        -->
                     </div>
                     <!--card stats end-->
 
@@ -359,8 +389,8 @@
                     <div id="work-collections">
                         <div class="row">
                             <div class="col s12 m12 l6">
-                                <ul id="projects-collection" class="collection">
-                                    <li class="collection-item avatar">
+                                <ul id="featured-collection" class="collection">
+                                    <!--<li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
                                         <span class="collection-header">Featured Products</span>
                                         <p>Products that are popular</p>
@@ -421,7 +451,7 @@
                                                 <div id="project-line-4"></div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li>-->
                                 </ul>
                             </div>
                             <div class="col s12 m12 l6">
@@ -504,7 +534,11 @@
             `;
             this.render(html, $('#app')[0]);
 
-            this.populateDropdownProduct();            
+            this.populateCategoryStats();
+
+            this.populateDropdownProduct();   
+
+            this.populateFeaturedProducts();
             
             function getProductTotal(category){
                 return 100;
@@ -518,6 +552,148 @@
                 component.categories();
             });
 
+            $('#btnOrders').click(function(){
+                component.orders();
+            });
+
+        }
+
+        orders(){
+            this.fetchOrders(function(){                
+                let html = ``;
+
+                html += `
+                    <br/>
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <table id="tblOrders" class="responsive-table display" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>                                    
+                                        <th>Date</th>                                    
+                                        <th>Product</th>                                    
+                                        <th>Qty</th>                                    
+                                        <th>Total Amount</th>
+                                        <th>Order Reference</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody id="tblOrderDetails"> </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                component.render(html,$('#app')[0]);
+                component.getOrderDetails();
+            });
+        }
+
+        getOrderDetails(){
+            let html = ``;
+            let o = component.state.order;
+            for(let i=0;i<o.length;i++){
+                html += `
+                    <tr>
+                        <td>${o[i].id}</td>
+                        <td>${o[i].date}</td>
+                        <td>${o[i].product_id}</td>
+                        <td>${o[i].qty}</td>
+                        <td>${o[i].total_amount}</td>
+                        <td>${o[i].order_reference}</td>
+                    </tr>
+                `;
+            }
+            component.render(html,$('#tblOrderDetails')[0]);
+            component.state.table_brand = $('#tblOrders').DataTable({                
+                "columnDefs": [
+                    {
+                        "targets": [ 0 ],
+                        "visible": false,
+                        "searchable": false
+                    }],
+                    "order": [[ 0, "desc" ]]
+            });          
+            $('select').material_select();            
+        }
+
+        populateCategoryStats(){
+            this.fetchCategories(function(){                
+                let category = component.state.category;
+                let parents = component.getCategoryParents(category);
+                //console.log(parents);
+                let html = `
+                    <div class="row"> 
+                `;
+                parents.map((p)=>{
+                    let cardBG = component.generateCardBG();
+                    html+=`
+                        <div class="col s12 m6 l3">
+                            <div class="card">
+                                <div class="card-content  ${cardBG} white-text">
+                                    <p class="card-stats-title"><i class="mdi-editor-insert-chart"></i> ${p.parent}</p>
+                                    <h4 class="card-stats-number">Php ${component.generateSalesAmount()}</h4>
+                                    <p class="card-stats-compare">
+                                        <i class="mdi-hardware-keyboard-arrow-up"></i> 
+                                        ${component.generateSalesPct()}
+                                        <span class="${cardBG}-text text-lighten-5">from last month</span>
+                                    </p>
+                                </div>
+                                <div class="card-action  ${cardBG} darken-2">
+                                    <div id="clients-barx" class="center-align"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `
+                    </div>
+                `;
+                component.render(html,$('.category-stats')[0]);
+            });
+        }
+
+        populateFeaturedProducts(){
+            component.fetchBrand(function(){
+                component.fetchCategories(function(){
+                    component.fetchProducts(function(){
+                        let product = component.state.product;
+                        let html = `
+                            <li class="collection-item avatar">
+                                <i class="mdi-action-trending-up circle light-blue darken-2"></i>
+                                <span class="collection-header">Featured Products</span>
+                                <p>Products that are popular</p>
+                                <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                            </li>
+                        `;
+                        product.map((p)=>{
+                            if(p.featured == "1" && p.deleted == "0"){
+                                html += `                        
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <p class="collections-title">${p.title}</p>
+                                                <p class="collections-content">${component.getBrandName(p.brand)}</p>
+                                            </div>
+                                            <div class="col s3">
+                                                <span class="task-cat ${component.generateCardBG()}">${component.getCategoryName(p.categories)}</span>
+                                                <div style="font-size:0.8rem;">
+                                                    <strike class="pink-text" >Php ${p.list_price}</strike> 
+                                                    <br/>
+                                                    <strong class="green-text darken-3">Php ${p.price}</strong>
+                                                    </div>
+                                            </div>
+                                            <div class="col s3">
+                                                <div id="project-line-1"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                `;
+                            }
+                        });
+                        component.render(html,$('#featured-collection')[0]);
+
+                    }); 
+                });
+            });
         }
 
         populateDropdownProduct(){
@@ -528,13 +704,14 @@
             })
             .then(function (res) {
                 let html = ``;
-                let data = res.data;
+                let data = res.data;                
 
                 let parents = component.getCategoryParents(res.data);
                 for(let i=0;i<parents.length;i++){
+                    let p_clean = component.removeUnwantedCharacters(parents[i].parent);
                     html += `
                         <li>
-                            <a class="dropdownProductMenu" id="dropdownProduct-${parents[i]}" href="#${parents[i]}">${parents[i]}</a>                             
+                            <a style="color:#607d8b" class="dropdownProductMenu" id="dropdownProduct-${parents[i].id}-${p_clean}" href="#${p_clean}">${p_clean}</a>                             
                         </li>
                     `;
                 }   
@@ -542,7 +719,9 @@
                 $('[class=dropdownProductMenu]').each(function(){                    
                     $(`#${this.id}`).click(function(){
                         let arr = this.id.split("-");
-                        let product = arr[1];
+                        let product_id = arr[1];
+                        let product = arr[2];
+                        component.state.product_selected_id = product_id;
                         component.state.product_selected = product;
                         component.products();
                         //console.log(arr[1]);                     
@@ -564,15 +743,19 @@
             let parents = [];
             for(let i=0; i<category.length; i++){
                 if(category[i].parent == "0"){
-                    parents.push(component.escapeHTML(category[i].category));
+                    parents.push({
+                        id: category[i].id,
+                        parent : component.escapeHTML(category[i].category)});
                 }
             }
             return parents;    
         }
 
         products(){
+            let product_id = component.state.product_selected_id;
             let product = component.state.product_selected;
             // console.log("############# PRODUCT PAGE RELOADED ##############");            
+            // console.log(product_id);            
             // console.log(product);            
             this.fetchBrand(function(){
                 component.fetchCategories(function(){
@@ -967,12 +1150,9 @@
                     //});
                 });
             });
-
-
         }
 
         getProductDetails(product){
-
             let category_id = 0;                
             for(let i=0;i<component.state.category.length;i++){
                 if(product == component.state.category[i].category){
@@ -1840,7 +2020,7 @@
         }
 
         getCategoryID(category){
-            let c = component.state.category;
+            /*let c = component.state.category;
             let cid = -1;
             for(let i=0;i<c.length;i++){
                 if(category==c[i].category){
@@ -1848,7 +2028,8 @@
                     break;
                 }
             }
-            return cid;
+            return cid;*/
+            return component.state.product_selected_id;
         }        
 
         fetchBrand(callback){
@@ -1947,6 +2128,39 @@
                 }); 
             });            
         }
+
+        fetchOrders(callback){
+            axios.get('./php/order', {
+                params: {
+                    action: "getAll" 
+                }
+            })
+            .then(function (res) {                
+                let data = res.data;
+                component.state.order = [];
+                for(let i=0;i<data.length;i++){                    
+                    component.state.order.push({
+                        id: data[i].id,                        
+                        date: data[i].date,
+                        product_id: data[i].product_id,
+                        qty: data[i].qty,
+                        total_amount: data[i].total_amount,
+                        order_reference: data[i].order_reference
+                    });
+                }
+                callback();   
+            })
+            .catch(function (error) {
+                console.log(error);
+                swal({
+                    title: "Error",
+                    text: "Fetch Orders Error\n" + error,
+                    type: "error",
+                    timer: 2000,
+                    showConfirmButton: false
+                }); 
+            });            
+        }        
 
 
     }
