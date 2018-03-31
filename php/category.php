@@ -61,7 +61,7 @@
 			}
 		}
 
-		if($action=="deleteparent"){
+/*		if($action=="deleteparent"){
 			$id = $_POST['id'];
 
 			$query = "DELETE FROM $table WHERE id='$id' OR parent='$id'";
@@ -73,7 +73,28 @@
 				$arr = array('status'=>'delete failed','msg'=>$query);
 				echo json_encode($arr);				
 			}
-		}	
+		}	*/
+
+		if($action=="deleteparent"){
+			$id = $_POST['id'];
+
+			$query = "DELETE FROM $table WHERE id='$id' OR parent='$id'";
+			$result = mysqli_query($con,$query) or die(mysql_error());			
+			if($result){
+				$query1 = "DELETE FROM products WHERE categories='$id'";
+				$result1 = mysqli_query($con,$query1) or die(mysql_error());	
+				if($result1){
+					$arr = array('status'=>'delete success','msg'=>$result1);
+					echo json_encode($arr);
+				}else{
+					$arr = array('status'=>'delete failed','msg'=>$query1);
+					echo json_encode($arr);
+				}
+			}else{
+				$arr = array('status'=>'delete failed','msg'=>$query);
+				echo json_encode($arr);				
+			}
+		}			
 
 		if($action=="delete"){
 			$id = $_POST['id'];

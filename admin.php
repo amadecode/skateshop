@@ -198,7 +198,8 @@
                 table_category: null,
                 table_category_selected_id: null,
                 table_product: null,
-                table_product_selected_id: null
+                table_product_selected_id: null,
+                product_selected: null
             };
             
 
@@ -239,13 +240,14 @@
                     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
                     <!--card stats start-->
-                    <div id="card-stats">
+                    <div class="category-stats" id="card-stats">
                         <div class="row">
+                            
                             <div class="col s12 m6 l3">
                                 <div class="card">
                                     <div class="card-content  green white-text">
                                         <p class="card-stats-title"><i class="mdi-social-group-add"></i> Decks</p>
-                                        <h4 class="card-stats-number">566</h4>
+                                        <h4 class="card-stats-number">0</h4>
                                         <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
                                         </p>
                                     </div>
@@ -293,11 +295,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>    
-                                    <!--card stats start-->
-                    <div id="card-stats">
-                        <div class="row">
+                        
                             <div class="col s12 m6 l3">
                                 <div class="card">
                                     <div class="card-content indigo white-text">
@@ -350,6 +348,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                     <!--card stats end-->
@@ -506,6 +505,10 @@
             this.render(html, $('#app')[0]);
 
             this.populateDropdownProduct();            
+            
+            function getProductTotal(category){
+                return 100;
+            }
 
             $('#btnBrands').click(function(){
                 component.brands();
@@ -514,6 +517,7 @@
             $('#btnCategories').click(function(){
                 component.categories();
             });
+
         }
 
         populateDropdownProduct(){
@@ -539,7 +543,8 @@
                     $(`#${this.id}`).click(function(){
                         let arr = this.id.split("-");
                         let product = arr[1];
-                        component.products(product);
+                        component.state.product_selected = product;
+                        component.products();
                         //console.log(arr[1]);                     
                     });                    
                 });
@@ -548,6 +553,7 @@
                 swal({
                     title: "Error",
                     text: error,
+                    type: "error",
                     timer: 2000,
                     showConfirmButton: false
                 }); 
@@ -564,142 +570,417 @@
             return parents;    
         }
 
-        products(product){
-            let html = `
-                <br/>
-                <div class="row">
-                    <div class="col s12 m4">
-                        <div>
-                            <h1 style="margin:0px;">Manage Products</h1>
-                            <label>Category: ${product.toUpperCase()}</label>
-                        </div>
-                        <br/>
-                        <button id="btnAddBrand" class="btn teal">Add</button>
-                        <button id="btnUpdateBrand" class="btn light-blue darken-2">Update</button>
-                        <button id="btnDeleteBrand" class="btn pink darken-1">Delete</button>
-                        <br/>
-                        <br/>
-                        <div class="input-field col s12">
-                            <input id="txtNewProduct" type="text" placeholder="Product Title" />
-                            <label id="lblNewProduct" for="txtNewProduct" class="active">Product Title</label>
-                        </div>
-                        
-                        <div class="input-field col s6">
-                            <input id="txtNewProductList" type="text" placeholder="0.00" />
-                            <label id="lblNewProductList" for="txtNewProductList" class="active">Product List</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="txtNewProductListPrice" type="text" placeholder="0.00" />
-                            <label id="lblNewProductListPrice" for="txtNewProductListPrice" class="active">Product List Price</label>
-                        </div>
-                        
-                        <div class="input-field col s6">
-                            <select id="selectProductBrand">
-                                <option disabled selected>Choose Brand</option>
-                                <option>OPtion A</option>
-                                <option>OPtion B</option>
-                            </select>
-                            <label>Product Brand</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input class="blue-text" id="txtNewProductCategory" type="text" readonly value="${product}" />
-                            <label id="lblNewProductCategory" for="txtNewProductCategory" class="active">Product Category</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="textareaProductDescription" class="materialize-textarea" length="120" placeholder="Product Description"></textarea>
-                            <label id="lblProductDescription" for="textareaProductDescription">Product Description</label>
-                        </div>
-                        
-                        <div class="switch col s4">
-                            <div style="font-size:0.8rem;color:#9e9e9e;margin-bottom:25px;">Feature this Product</div>
-                            <label id="switchProductFeature">
-                                Off
-                                <input type="checkbox">
-                                <span class="lever"></span> On
-                            </label>
-                        </div>
-                        
-                        <div class="switch col s4">
-                            <div style="font-size:0.8rem;color:#9e9e9e;margin-bottom:25px;">Hide this Product</div>
-                            <label id="switchProductVisible">
-                                Off
-                                <input type="checkbox">
-                                <span class="lever"></span> On
-                            </label>
-                        </div>
-                        
-                        <div class="switch col s4">
-                            <div style="font-size:0.8rem;color:#9e9e9e;margin-bottom:10px;">Product Quantity</div>
-                            <div class="col s8">
-                                <input id="txtNewProductListPrice" type="number" placeholder="0" />
-                            </div>
-                            <div class="col s4" style="margin-top:20px;">
-                                <span style="font-size:0.8rem;color:#9e9e9e;" >pcs</span>
-                            </div>
-                        </div>
-                        
-                        <div class="input-field col s12">                            
-                            <div style="font-size:0.8rem;color:#9e9e9e;">Product Image</div>
-                            <div class="col s6">
-                                <img  style="width:140px;height:140px;" src="images/img1.jpg" alt="" class="circle input-field responsive-img valign">
-                            </div>
-                            <div class="col s6">
-                                <button class="btn btn-primary" style="margin-top:110px;">Upload Image</button>
-                            </div>
+        products(){
+            let product = component.state.product_selected;
+            // console.log("############# PRODUCT PAGE RELOADED ##############");            
+            // console.log(product);            
+            this.fetchBrand(function(){
+                component.fetchCategories(function(){
+                    //component.fetchProducts(function(){
+                   
 
-                        </div>
+                        let html = `
+                            <br/>
+                            <div class="row">
+                                <div class="col s12 m4">
+                                    <div>
+                                        <h1 style="margin:0px;">Manage Products</h1>
+                                        <label>Main Category: ${product.toUpperCase()}</label>
+                                    </div>
+                                    <br/>
+                                    <button id="btnAddProduct" class="btn teal">Add</button>
+                                    <button id="btnUpdateProduct" class="btn light-blue darken-2">Update</button>
+                                    <button id="btnDeleteProduct" class="btn pink darken-1">Delete</button>
+                                    <br/>
+                                    <br/>
+                                    <div class="input-field col s12">
+                                        <textarea id="textareaProductTitle" class="materialize-textarea blue-text" length="120" placeholder="Product Title"></textarea>
+                                        <label id="lblProductTitle" for="textareaProductTitle">Product Title</label>
+                                    </div>
+                                    
+                                    <div class="input-field col s6">
+                                        <input id="txtNewProductList" class="blue-text" type="text" placeholder="0.00" />
+                                        <label id="lblNewProductList" for="txtNewProductList" class="active">Product List</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="txtNewProductListPrice" class="blue-text" type="text" placeholder="0.00" />
+                                        <label id="lblNewProductListPrice" for="txtNewProductListPrice" class="active">Product List Price</label>
+                                    </div>
+                                    
+                                    <div class="input-field col s6">
+                                        <select id="selectProductBrand" class="blue-text">
+                                            <option disabled selected>Choose Brand</option>
+                                            <option>OPtion A</option>
+                                            <option>OPtion B</option>
+                                        </select>
+                                        <label>Product Brand</label>
+                                    </div>
 
-                    </div>
-                    <div class="col s12 m8">
-                        <table id="tblProducts" class="responsive-table display" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>                                    
-                                    <th>Title</th>                                    
-                                    <th>Price</th>                                    
-                                    <th>List Price</th>                                    
-                                    <th>Brand</th>
-                                    <th>Categories</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Featured</th>
-                                    <th>Visible</th>
-                                    <th>Qty</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tblProductDetails"> </tbody>
-                        </table>
-                    </div>
-                </div>
-                <br>
-                <div class="divider"></div> 
-            `;
-            this.render(html, $('#app')[0]);
-            $('select').material_select();
-            $('#lblProductDescription').addClass('active');  
+                                    <div class="input-field col s6">
+                                        <select id="selectProductCategory" class="blue-text">
+                                            <option disabled selected>Choose Sub Category</option>
+                                            <option>OPtion A</option>
+                                            <option>OPtion B</option>
+                                        </select>
+                                        <label>Product Sub Category</label>
+                                    </div>
+                                    
+                                    <!--<div class="input-field col s6">
+                                        <input id="txtNewProductCategoryID" type="hidden" value="${component.getCategoryID(product)}" />
+                                        <input class="blue-text" id="txtNewProductCategory" type="text" readonly value="${product}" />
+                                        <label id="lblNewProductCategory" for="txtNewProductCategory" class="active">Product Category</label>
+                                    </div>
+                                    -->
 
-            this.getProductDetails(product);
+                                    <div class="input-field col s12">
+                                        <textarea id="textareaProductDescription" class="materialize-textarea blue-text" length="120" placeholder="Product Description"></textarea>
+                                        <label id="lblProductDescription" for="textareaProductDescription">Product Description</label>
+                                    </div>
+                                    
+                                    <div class="switch col s4">
+                                        <div style="font-size:0.8rem;color:#9e9e9e;margin-bottom:25px;">Feature this Product</div>
+                                        <label >
+                                            Off
+                                            <input type="checkbox" id="checkboxProductFeature">
+                                            <span class="lever"></span> On
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="switch col s4">
+                                        <div style="font-size:0.8rem;color:#9e9e9e;margin-bottom:25px;">Hide this Product</div>
+                                        <label >
+                                            Off
+                                            <input type="checkbox" id="checkboxProductVisible" >
+                                            <span class="lever"></span> On
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="switch col s4">
+                                        <div style="font-size:0.8rem;color:#9e9e9e;margin-bottom:10px;">Product Quantity</div>
+                                        <div class="col s8">
+                                            <input id="txtNewProductQty" class="blue-text" type="number" placeholder="0" />
+                                        </div>
+                                        <div class="col s4" style="margin-top:20px;">
+                                            <span style="font-size:0.8rem;color:#9e9e9e;" >pcs</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-field col s12">                            
+                                        <div style="font-size:0.8rem;color:#9e9e9e;">Product Image</div>
+                                        <div class="col s6">
+                                            <img id="imageProduct" style="width:200px;height:400px;" src="images/no_image.jpg" alt="" class="input-field responsive-img valign">
+                                        </div>
+                                        <div class="col s6">
+                                            <button class="btn btn-primary" style="margin-top:200px;">Upload Image</button>
+                                        </div>
+                                        <div class="col s12">
+                                            <input style="font-size:0.7em" id="txtProductImage" type="text" class="blue-text" placeholder="images/no_image.jpg" readonly />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col s12 m8">
+                                    <table id="tblProducts" class="responsive-table display" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>                                    
+                                                <th>Title</th>                                    
+                                                <th>Price</th>                                    
+                                                <th>List Price</th>                                    
+                                                <th>Brand</th>
+                                                <th>Categories</th>
+                                                <th>Image</th>
+                                                <th>Description</th>
+                                                <th>Featured</th>
+                                                <th>Visible</th>
+                                                <th>Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblProductDetails"> </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="divider"></div> 
+                        `;
+                        component.render(html, $('#app')[0]);
+                        $('select').material_select();
+                        $('#lblProductTitle').addClass('active');  
+                        $('#lblProductDescription').addClass('active');  
+
+                        component.getProductDetails(product);
+
+                        $('#tblProducts tbody').on( 'click', 'tr', function () {
+                            if ( $(this).hasClass('selected') ) {
+                                $(this).removeClass('selected');
+                            }
+                            else {
+                                component.state.table_product.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+
+                                let selected_product = $(this).find('td').html();
+              
+                                for(let i=0;i<component.state.product.length;i++){                        
+                                    if(selected_product == component.state.product[i].title){
+                                        component.state.table_product_selected_id = component.state.product[i].id;
+                                        $('#lblProductTitle').addClass('active');
+                                        $('#textareaProductTitle').val(component.state.product[i].title);
+                                        $('#txtNewProductList').val(component.state.product[i].price);
+                                        $('#txtNewProductListPrice').val(component.state.product[i].list_price); 
+
+                                        $('#selectProductBrand').val(component.state.product[i].brand);
+                                        $('#selectProductCategory').val(component.state.product[i].categories);
+
+                                        $('#lblProductDescription').addClass('active');
+                                        $('#textareaProductDescription').val(component.state.product[i].description);
+
+                                        
+                                        if(component.state.product[i].featured=="0"){
+                                            $('#checkboxProductFeature')[0].checked = false;
+                                        }else if(component.state.product[i].featured=="1"){
+                                            $('#checkboxProductFeature')[0].checked = true;
+                                        } 
+
+                                        if(component.state.product[i].deleted=="0"){
+                                            $('#checkboxProductVisible')[0].checked = false;
+                                        }else if(component.state.product[i].deleted=="1"){
+                                            $('#checkboxProductVisible')[0].checked = true;
+                                        }
+
+                                        $('#txtNewProductQty').val(component.state.product[i].qty);
+
+                                        $('#imageProduct').attr({src:component.state.product[i].image})
+                                        .error(function(){
+                                            $('#imageProduct').attr({src:'images/no_image.jpg'});
+                                            $('#txtProductImage').val('images/no_image.jpg');
+                                        });
+                                        if(component.state.product[i].image.length==0){
+                                            $('#imageProduct').attr({src:'images/no_image.jpg'});
+                                            $('#txtProductImage').val('images/no_image.jpg');
+                                        }else{
+                                            $('#txtProductImage').val(component.state.product[i].image);
+                                        }
+
+                                        // $('#imageProduct').attr({src:'images/img2.jpg'});
+                                
+                                        //$('#checkboxProductFeature').attr({checked:'true'});
+                                        //console.log($('#checkboxProductFeature').val());
+                                        // $('#selectCategory').val(component.state.category[i].parent+"");
+                                        $('select').material_select();
+
+                                        break;                       
+                                    }
+                                }
+                                
+                            }
+                        });
+
+                        $('#btnAddProduct').click(function(){
+                            let featured = 0; if($('#checkboxProductFeature')[0].checked==true){ featured = 1; }
+                            let deleted = 0; if($('#checkboxProductVisible')[0].checked==true){ deleted = 1; }
+
+                            let product = {
+                                title: $('#textareaProductTitle').val(),
+                                price: parseFloat($('#txtNewProductList').val()),
+                                list_price: parseFloat($('#txtNewProductListPrice').val()),
+                                brand:$('#selectProductBrand').val(),
+                                categories:$('#selectProductCategory').val(),
+                                description:$('#textareaProductDescription').val(),
+                                featured,featured,
+                                deleted:deleted,
+                                qty:parseInt($('#txtNewProductQty').val()),
+                                image:$('#txtProductImage').val()
+                            };
+                            // console.log('######################');
+                            // console.log(product);
+
+                            if( (isNaN(product.list_price) || isNaN(product.price) || 
+                                 product.brand==null || isNaN(product.qty)
+                                ) &&
+                                (product.title.length<2 || product.price<=1.00 || 
+                                 product.list_price<=1.00 || 
+                                 product.categories.length<1 || product.description.length<2 || 
+                                 product.qty<0 || product.image.length<2) 
+                                ){
+                                    swal({
+                                        title: "Invalid Input!",
+                                        text: "Make sure you have properly set all the fields",
+                                        type: "error",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    });                   
+                            }else{
+                                var params = new URLSearchParams();
+                                params.append('action', 'insert');
+                                params.append('title', product.title);
+                                params.append('price', product.price);
+                                params.append('list_price', product.list_price);
+                                params.append('brand', product.brand);
+                                params.append('categories', product.categories);
+                                params.append('description', product.description);
+                                params.append('featured', product.featured);
+                                params.append('deleted', product.deleted);
+                                params.append('qty', product.qty);
+                                params.append('image', product.image);
+                                axios.post('./php/product', params)
+                                .then(function (res) {
+                                    //console.log(res);
+                                    swal({
+                                        title: res.data.status.toUpperCase(),
+                                        text: res.data.msg,
+                                        type: "success",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }); 
+                                    if(res.data.msg){
+                                        //component.getBrandDetails();
+                                        component.products();
+                                    }
+                                })
+                                .catch(function (error) {
+                                    //console.log(error);
+                                    swal({
+                                        title: "Error",
+                                        text: error,
+                                        type: "error",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }); 
+                                });    
+                            }                      
+                        });
+
+                        $('#btnUpdateProduct').click(function(){
+                            let featured = 0; if($('#checkboxProductFeature')[0].checked==true){ featured = 1; }
+                            let deleted = 0; if($('#checkboxProductVisible')[0].checked==true){ deleted = 1; }
+
+                            let product = {
+                                id:component.state.table_product_selected_id,
+                                title: $('#textareaProductTitle').val(),
+                                price: parseFloat($('#txtNewProductList').val()),
+                                list_price: parseFloat($('#txtNewProductListPrice').val()),
+                                brand:$('#selectProductBrand').val(),
+                                categories:$('#selectProductCategory').val(),
+                                description:$('#textareaProductDescription').val(),
+                                featured,featured,
+                                deleted:deleted,
+                                qty:parseInt($('#txtNewProductQty').val()),
+                                image:$('#txtProductImage').val()
+                            };
+
+                            // console.log("############ PRODUCT UPDATE  #############");
+                            // console.log("product: ",product);
+
+                            if(product.title.length<2 || product.price<=1.00 || product.list_price<=1.00 || product.brand.length<1 || product.categories.length<1 || product.description.length<2 || product.qty<0 || product.image.length<2 ){
+                                swal({
+                                    title: "Invalid Input!",
+                                    text: "Make sure you have properly set all the fields",
+                                    type: "error",
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });                   
+                            }else{
+                                var params = new URLSearchParams();
+                                params.append('action', 'put');
+                                params.append('id', product.id);
+                                params.append('title', product.title);
+                                params.append('price', product.price);
+                                params.append('list_price', product.list_price);
+                                params.append('brand', product.brand);
+                                params.append('categories', product.categories);
+                                params.append('description', product.description);
+                                params.append('featured', product.featured);
+                                params.append('deleted', product.deleted);
+                                params.append('qty', product.qty);
+                                params.append('image', product.image);
+                                axios.post('./php/product', params)
+                                .then(function (res) {
+                                    swal({
+                                        title: res.data.status.toUpperCase(),
+                                        text: res.data.msg,
+                                        type: "success",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }); 
+                                    if(res.data.msg){
+                                        component.state.table_product_selected_id = null;
+                                        component.products();
+                                    }
+                                })
+                                .catch(function (error) {
+                                    //console.log(error);
+                                    swal({
+                                        title: "Product Update Error",
+                                        text: error,
+                                        type: "error",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }); 
+                                });                      
+                            }
+                        });
+
+                        $('#btnDeleteProduct').click(function(){
+                            if(component.state.table_product_selected_id!=null){
+                                component.state.table_product.row('.selected').remove().draw( false );  
+                                var params = new URLSearchParams();
+                                params.append('action', 'delete');
+                                params.append('id', component.state.table_product_selected_id);
+                                axios.post('./php/product', params)
+                                .then(function (res) {
+                                    //console.log(res);
+                                    swal({
+                                        title: res.data.status.toUpperCase(),
+                                        text: res.data.msg,
+                                        type: "success",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }); 
+                                    if(res.data.msg){
+                                        component.state.table_product_selected_id = null;
+                                        component.products();
+                                        swal("Deleted!", "Product has been deleted.", "success"); 
+                                    }
+                                })
+                                .catch(function (error) {
+                                    //console.log(error);
+                                    swal({
+                                        title: "Error",
+                                        text: error,
+                                        type: "error",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }); 
+                                });
+                            }else{
+                                swal({
+                                    title: "Error",
+                                    text: "Please select a record to be deleted!",
+                                    type: "error",
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }); 
+                            }
+
+                        });
+                    //});
+                });
+            });
+
 
         }
 
         getProductDetails(product){
 
-            this.fetchCategories(function(){
-                console.log("########################");
-                console.log(component.state.category);
-            });
-
-            let category_id = 0;
-            
-            /*for(let i=0;i<component.state.product.length;i++){
-                if(product == component.state.product[i].category){
-                    category_id = component.state.product[i].id;
+            let category_id = 0;                
+            for(let i=0;i<component.state.category.length;i++){
+                if(product == component.state.category[i].category){
+                    category_id = component.state.category[i].id;
                     break;
                 }
-            }*/
-
-            console.log("category id: " + category_id);
-
+            }
+            
             axios.get('./php/product', {
                 params: {
                     action: "getAll" ,
@@ -714,7 +995,7 @@
                 for(let i=0;i<data.length;i++){                    
                     component.state.product.push({
                         id: data[i].id,
-                        title: data[i].title,
+                        title: component.escapeHTML(data[i].title),
                         price: data[i].price,
                         list_price: data[i].list_price,
                         brand: data[i].brand,
@@ -727,6 +1008,84 @@
                     });
                 }
 
+                let p = component.state.product;
+                let c = component.state.category;
+                let cc = [];
+
+                for(let i=0;i<c.length;i++){
+                    if(c[i].parent == component.getCategoryID(component.state.product_selected)){
+                        cc.push({
+                            id: c[i].id,
+                            category: c[i].category
+                        });
+                    }
+                }
+
+                data = [];
+                for(let i=0;i<p.length;i++){
+                    for(let ii=0;ii<cc.length;ii++){
+                        if(cc[ii].id==p[i].categories){
+                            data.push({
+                                id:p[i].id,
+                                title:p[i].title,
+                                price:p[i].price,
+                                list_price:p[i].list_price,
+                                brand:p[i].brand,
+                                categories:p[i].categories,
+                                image:p[i].image,
+                                description:p[i].description,
+                                featured:p[i].featured,
+                                deleted:p[i].deleted,
+                                qty:p[i].qty
+                            });
+                        }                        
+                    }
+                }
+
+
+
+
+                /*for(let i=0;i<c.length;i++){
+                    console.log(`i=${i}: ${c[i].parent} == ${component.getCategoryID(component.state.product_selected)}`);
+                    if(c[i].parent == component.getCategoryID(component.state.product_selected)){
+                        for(let j=0;p.length;p++){
+                            console.log(`j=${j}: ${c[i].id} == ${p[j].categories}`);
+                            if(c[i].id == p[j].categories){
+                                d.push({
+                                    id:p[j].id,
+                                    title:p[j].title,
+                                    price:p[j].price,
+                                    list_price:p[j].list_price,
+                                    brand:component.getBrandName(p[j].brand),
+                                    categories:component.getCategoryName(p[j].categories),
+                                    image:p[j].image,
+                                    description:p[j].description,
+                                    featured:component.interpretFeatured(p[j].featured),
+                                    deleted:component.interpretVisible(p[j].deleted),
+                                    qty:p[j].qty
+                                });
+                                html += `
+                                    <tr>
+                                        <td>${p[j].id}</td>
+                                        <td>${p[j].title}</td>
+                                        <td>${p[j].price}</td>
+                                        <td>${p[j].list_price}</td>
+                                        <td>${component.getBrandName(p[j].brand)}</td>
+                                        <td>${component.getCategoryName(p[j].categories)}</td>
+                                        <td>${p[j].image}</td>                            
+                                        <td>${p[j].description}</td>                            
+                                        <td>${component.interpretFeatured(p[j].featured)}</td>                            
+                                        <td>${component.interpretVisible(p[j].deleted)}</td>                            
+                                        <td>${p[j].qty}</td>                            
+                                    </tr>
+                                `;
+                            }
+                        }
+                    }
+                }*/
+
+                
+                
                 for(let i=0;i<data.length;i++){
                     html += `
                         <tr>
@@ -734,19 +1093,20 @@
                             <td>${data[i].title}</td>
                             <td>${data[i].price}</td>
                             <td>${data[i].list_price}</td>
-                            <td>${data[i].brand}</td>
-                            <td>${data[i].categories}</td>
+                            <td>${component.getBrandName(data[i].brand)}</td>
+                            <td>${component.getCategoryName(data[i].categories)}</td>
                             <td>${data[i].image}</td>                            
                             <td>${data[i].description}</td>                            
-                            <td>${data[i].featured}</td>                            
-                            <td>${data[i].deleted}</td>                            
+                            <td>${component.interpretFeatured(data[i].featured)}</td>                            
+                            <td>${component.interpretVisible(data[i].deleted)}</td>                            
                             <td>${data[i].qty}</td>                            
                         </tr>
                     `;
-                }                    
+                }
+
                 
                 component.render(html,$('#tblProductDetails')[0]);
-                component.state.table_category = $('#tblProducts').DataTable({
+                component.state.table_product = $('#tblProducts').DataTable({
                     "columnDefs": [
                         {"targets": [ 0 ], "visible": false, "searchable": false },
                         {"targets": [ 2 ], "visible": false, "searchable": false },
@@ -757,16 +1117,20 @@
                 }); 
 
 
-                /*html = `<option value="0" selected>Parent</option>`;
-                for(let i=0;i<data.length;i++){      
-                    if(data[i].parent=="0"){
-                        html += `\n <option value="${data[i].id}">${data[i].category}</option> `;                        
-                    }
+                html = `<option value="0" disabled selected>Choose Brand</option>`;
+                for(let i=0;i<component.state.brand.length;i++){ 
+                    html += `\n <option value="${component.state.brand[i].id}">${component.state.brand[i].brand}</option> `;
                 }               
-                // console.log(html);
-                component.render(html,$('#selectCategory')[0]);
+                component.render(html,$('#selectProductBrand')[0]);
+
+                html = `<option value="0" disabled selected>Choose Sub Category</option>`;
+                for(let i=0;i<component.state.category.length;i++){ 
+                    if(component.state.category[i].parent == component.getCategoryID(component.state.product_selected) )
+                    html += `\n <option value="${component.state.category[i].id}">${component.state.category[i].category}</option> `;
+                }               
+                component.render(html,$('#selectProductCategory')[0]);
                 
-                 */ 
+                  
                 $('select').material_select();  
                 
             })
@@ -774,11 +1138,12 @@
                 swal({
                     title: "Error",
                     text: error,
+                    type: "error",
                     timer: 2000,
                     showConfirmButton: false
                 }); 
             });
-        }        
+        }  
 
         brands(){
             let html = `
@@ -821,6 +1186,7 @@
                     swal({
                         title: "Invalid Input!",
                         text: "Make sure you have properly set the brand name",
+                        type: "error",
                         timer: 2000,
                         showConfirmButton: false
                     });                   
@@ -834,6 +1200,7 @@
                         swal({
                             title: res.data.status.toUpperCase(),
                             text: res.data.msg,
+                            type: "success",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -847,6 +1214,7 @@
                         swal({
                             title: "Error",
                             text: error,
+                            type: "error",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -885,6 +1253,7 @@
                         swal({
                             title: res.data.status.toUpperCase(),
                             text: res.data.msg,
+                            type: "success",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -898,6 +1267,7 @@
                         swal({
                             title: "Error",
                             text: error,
+                            type: "error",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -906,6 +1276,7 @@
                     swal({
                         title: "Error",
                         text: "Please select a record to be deleted!",
+                        type: "error",
                         timer: 2000,
                         showConfirmButton: false
                     }); 
@@ -926,6 +1297,7 @@
                         swal({
                             title: res.data.status.toUpperCase(),
                             text: res.data.msg,
+                            type: "success",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -939,6 +1311,7 @@
                         swal({
                             title: "Error",
                             text: error,
+                            type: "error",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -947,12 +1320,53 @@
                     swal({
                         title: "Error",
                         text: "Please select a record to be deleted!",
+                        type: "error",
                         timer: 2000,
                         showConfirmButton: false
                     }); 
                 }
                 
             });            
+        }
+
+        getBrandName(id){
+            let brands = component.state.brand;            
+            let b = "not found";
+            for(let i=0;i<brands.length;i++){                
+                if(brands[i].id == id){
+                    b = brands[i].brand;
+                    break;
+                }
+            }
+            return b;
+        }
+
+        getCategoryName(id){
+            let categories = component.state.category;            
+            let c = "not found";
+            for(let i=0;i<categories.length;i++){                
+                if(categories[i].id == id){
+                    c = categories[i].category;
+                    break;
+                }
+            }
+            return c;
+        }
+
+        interpretFeatured(val){
+            if(val=="0") {
+                return "Not Featured";
+            }else{
+                return "Featured";
+            }
+        }
+
+        interpretVisible(val){
+            if(val=="0") {
+                return "Hidden";
+            }else{
+                return "Visible";
+            }
         }
 
         getBrandDetails(){
@@ -999,6 +1413,7 @@
                 swal({
                     title: "Error",
                     text: error,
+                    type: "error",
                     timer: 2000,
                     showConfirmButton: false
                 }); 
@@ -1098,6 +1513,7 @@
                     swal({
                         title: "Invalid Input!",
                         text: "Make sure you have properly set the category name",
+                        type: "error",
                         timer: 2000,
                         showConfirmButton: false
                     });                   
@@ -1112,6 +1528,7 @@
                         swal({
                             title: res.data.status.toUpperCase(),
                             text: res.data.msg,
+                            type: "success",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -1125,6 +1542,7 @@
                         swal({
                             title: "Error",
                             text: error,
+                            type: "error",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -1139,6 +1557,7 @@
                     swal({
                         title: "Invalid Input!",
                         text: "Make sure you have properly set the category name",
+                        type: "error",
                         timer: 2000,
                         showConfirmButton: false
                     });                   
@@ -1154,6 +1573,7 @@
                         swal({
                             title: res.data.status.toUpperCase(),
                             text: res.data.msg,
+                            type: "success",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -1167,6 +1587,7 @@
                         swal({
                             title: "Error",
                             text: error,
+                            type: "error",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -1212,6 +1633,7 @@
                                     swal({
                                         title: res.data.status.toUpperCase(),
                                         text: res.data.msg,
+                                        type: "success",
                                         timer: 2000,
                                         showConfirmButton: false
                                     }); 
@@ -1226,6 +1648,7 @@
                                     swal({
                                         title: "Error",
                                         text: error,
+                                        type: "error",
                                         timer: 2000,
                                         showConfirmButton: false
                                     }); 
@@ -1234,6 +1657,7 @@
                                 swal({
                                     title: "Error",
                                     text: "Please select a record to be deleted!",
+                                    type: "error",
                                     timer: 2000,
                                     showConfirmButton: false
                                 }); 
@@ -1251,6 +1675,7 @@
                         swal({
                             title: res.data.status.toUpperCase(),
                             text: res.data.msg,
+                            type: "success",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -1265,6 +1690,7 @@
                         swal({
                             title: "Error",
                             text: error,
+                            type: "error",
                             timer: 2000,
                             showConfirmButton: false
                         }); 
@@ -1396,6 +1822,7 @@
                 swal({
                     title: "Error",
                     text: error,
+                    type: "error",
                     timer: 2000,
                     showConfirmButton: false
                 }); 
@@ -1411,6 +1838,47 @@
             }
             return "Parent";
         }
+
+        getCategoryID(category){
+            let c = component.state.category;
+            let cid = -1;
+            for(let i=0;i<c.length;i++){
+                if(category==c[i].category){
+                    cid = c[i].id;
+                    break;
+                }
+            }
+            return cid;
+        }        
+
+        fetchBrand(callback){
+            axios.get('./php/brand', {
+                params: {
+                    action: "getAll" 
+                }
+            })
+            .then(function (res) {
+                let html = ``;
+                let data = res.data;
+                component.state.brand = [];
+                for(let i=0;i<data.length;i++){                    
+                    component.state.brand.push({
+                        id: data[i].id,
+                        brand: component.escapeHTML(data[i].brand)
+                    });
+                }
+                callback();   
+            })
+            .catch(function (error) {
+                swal({
+                    title: "Error",
+                    text: "Fetch Categories Error\n" + error,
+                    type: "error",
+                    timer: 2000,
+                    showConfirmButton: false
+                }); 
+            });            
+        } 
 
         fetchCategories(callback){
             axios.get('./php/category', {
@@ -1435,6 +1903,45 @@
                 swal({
                     title: "Error",
                     text: "Fetch Categories Error\n" + error,
+                    type: "error",
+                    timer: 2000,
+                    showConfirmButton: false
+                }); 
+            });            
+        }        
+
+        fetchProducts(callback){
+            axios.get('./php/product', {
+                params: {
+                    action: "getAll" 
+                }
+            })
+            .then(function (res) {
+                let html = ``;
+                let data = res.data;
+                component.state.product = [];
+                for(let i=0;i<data.length;i++){                    
+                    component.state.product.push({
+                        id: data[i].id,
+                        title: component.escapeHTML(data[i].title),
+                        price: data[i].price,
+                        list_price: data[i].list_price,
+                        brand: data[i].brand,
+                        categories: data[i].categories,
+                        image: data[i].image,
+                        description: component.escapeHTML(data[i].description),
+                        featured: data[i].featured,
+                        deleted: data[i].deleted,
+                        qty: data[i].qty
+                    });
+                }
+                callback();   
+            })
+            .catch(function (error) {
+                swal({
+                    title: "Error",
+                    text: "Fetch Categories Error\n" + error,
+                    type: "error",
                     timer: 2000,
                     showConfirmButton: false
                 }); 
