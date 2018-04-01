@@ -1542,7 +1542,7 @@
         }
 
         interpretVisible(val){
-            if(val=="0") {
+            if(val=="1") {
                 return "Hidden";
             }else{
                 return "Visible";
