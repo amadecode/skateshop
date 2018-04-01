@@ -247,15 +247,19 @@
 
                 this.landingPage();
                 this.fetchProducts(function(){
-                    console.log("Products fetched successfully!");
-                    console.log(component.state.products);
-
+                    // console.log("Products fetched successfully!");
+                    // console.log(component.state.products);
 
                     component.initMasonry();
                     component.landingPage_loadFeaturedProducts();
+                });
 
-                    //component.loadMyCart();
+                $('#editmycart').click(function(){
+                    component.editmycartPage();               
+                });
 
+                $('#viewitems').click(function(){
+                    component.viewitemsPage();               
                 });
 
             }
@@ -386,7 +390,7 @@
                         </li>
                         <li class="li-hover">
                             <p class="right" style="margin-top:4px;margin-right:10px;">
-                                    <u><a href="#" class="blue-text">Edit</a></u>
+                                    <u><a href="#editmycart" id="editmycart" class="blue-text">Edit</a></u>
                             <p class="ultra-small margin more-text">MY CART</p>
                             <div class="clearfix"></div>
                         </li>
@@ -412,7 +416,7 @@
                         <li class="li-hover"><p class="ultra-small margin more-text">SEE MORE</p></li>
                         <li class="bold active"><a href="./" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Featured Items</a>
                         </li>
-                        <li class="bold"><a href="#view" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> View Items</a>
+                        <li class="bold"><a href="#viewitems" id="viewitems" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> View Items</a>
                         </li>
                         <li class="no-padding">
                             <ul class="collapsible collapsible-accordion">
@@ -429,6 +433,11 @@
                             </ul>
                         </li>
                         <li class="bold"><a href="#tips" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Skater Tips</a>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                         </li>
                     </ul>
                     
@@ -595,7 +604,7 @@
                         result.push(obj);
                     }
                 });
-                console.log(result);
+                // console.log(result);
                 let html = `<div class="product-sizer"></div>`;
                 result.map((obj)=>{
                     html += `                    
@@ -656,6 +665,133 @@
                 });
                 this.render(html,$('#products')[0]);
             }
+
+
+            /*Edit My Cart Page Functions*/
+
+                /*
+                    TODO's
+                    a. CRUD for component.state.cart
+                    b. include image in the list
+                */
+
+            editmycartPage(){
+                this.clearContent();
+
+                let html = `
+                    <div id="card-widgets" style="margin-top:-300px;">
+                        <div class="row">
+                            <div class="col s12 m12 l3">&nbsp;</div>
+                            <div class="col s12 m12 l6">
+                                <ul id="mycart-collection" class="collection"> </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                this.render(html,$('#content')[0]);
+
+                let cart = component.state.cart;                
+                html = `
+                        <li class="collection-item avatar">
+                            <i class="mdi-maps-local-grocery-store circle indigo darken-2"></i>
+                            <span class="collection-header">My Cart</span>
+                            <p>Update or Remove Items</p>
+                            <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                        </li>
+                `;
+                for(let i=0;i<cart.length;i++){
+                    let price = parseFloat(cart[i].product.price);
+                    let qty = parseInt(cart[i].qty);
+                    let total = parseFloat(price * qty);                    
+                    html += `                        
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s7">
+                                    <p class="collections-title"><strong>Item#${i+1}</strong></p>
+                                    <p class="collections-content">
+                                        ${cart[i].product.title} <br/>
+                                        <em>${cart[i].product.description}</em> <br/>
+                                        Php ${cart[i].product.price}
+                                    </p>
+                                </div>
+                                <div class="col s2">
+                                    <input type="number" value="${cart[i].qty}"/>
+                                </div>
+                                <div class="col s3">
+                                    <p class="collections-content">${total}</p>       
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                }
+                this.render(html,$('#mycart-collection')[0]);
+            }
+
+
+            /*View Items Page Functions*/
+
+                /* 
+                    TODO's
+
+                        a. initialize material tabs
+                        b. each tab = category
+
+                */
+
+            viewitemsPage(){
+                this.clearContent();
+
+                let html = `
+                             <div id="multi-color-tab" class="section">
+                                    <h4 class="header">Multi Color with icon tab</h4>
+                                    <div class="row">
+                                      <div class="col s12 m4 l3">
+                                        <p>With the help of materialize admin panel theme colors & icon options you can create multi Color with icon tab.</p>
+                                      </div>
+                                      <div class="col s12 m8 l9">
+                                        <div class="row">
+                                          <div class="col s12">
+                                            <ul class="tabs tab-demo-active z-depth-1">
+                                              <li class="tab col s3"><a class="white-text red darken-1 waves-effect waves-light" href="#sapien1"><i class="mdi-action-perm-identity"></i> Identity</a>
+                                              </li>
+                                              <li class="tab col s3"><a class="white-text purple darken-1 waves-effect waves-light active" href="#activeone1"><i class="mdi-action-settings-display"></i> Display</a>
+                                              </li>
+                                              <li class="tab col s3"><a class="white-text light-blue darken-1 waves-effect waves-light" href="#vestibulum1"><i class="mdi-action-speaker-notes"></i> Notes</a>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                          <div class="col s12">
+                                            <div id="sapien1" class="col s12  red lighten-3">
+                                              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                              <ol>
+                                                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                                                <li>Aliquam tincidunt mauris eu risus.</li>
+                                                <li>Vestibulum auctor dapibus neque.</li>
+                                              </ol>
+
+                                            </div>
+                                            <div id="activeone1" class="col s12  purple lighten-3">
+                                              <dl>
+                                                <dt>Definition list</dt>
+                                                <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+                                                <dt>Lorem ipsum dolor sit amet</dt>
+                                                <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+                                              </dl>
+                                            </div>
+                                            <div id="vestibulum1" class="col s12  light-blue lighten-3">
+                                              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                                                mi vitae est. Mauris placerat eleifend leo.</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                `;
+                this.render(html,$('#content')[0]);
+                $('.tabs').tabs();
+            }
+
 
             /* Utils */
             initMasonry(){
@@ -771,7 +907,11 @@
                 }
             }
 
-
+            clearContent(){
+                $('.slider').hide();
+                $('#products').hide();
+                $('#card-widgets').hide();
+            }
 
         }
 
